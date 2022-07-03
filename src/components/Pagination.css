@@ -1,0 +1,13 @@
+.pagination-item {
+  font-size: 16px;
+  padding: 8px 16px;
+  border: 1px solid lighten(black, 15%);
+  border-radius: 3px;
+  background-color: rgb(247, 241, 210);
+}
+.pagination-item:hover {
+  background-color: rgb(245, 181, 181);
+}
+.active {
+  background-color: rgb(178, 198, 252);
+}
