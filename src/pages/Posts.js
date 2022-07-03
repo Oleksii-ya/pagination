@@ -9,6 +9,19 @@ const Posts = () => {
   const [postsFoDisplay, setPostsFoDisplay] = useState([]);
   const [postsPerPage, setPostsPerPage] = useState(5)
 
+  function handlerInput(e) {
+    let newPostsPerPage = e.target.value
+    if (newPostsPerPage < 0) {
+      setPostsPerPage(0)
+      setNumberPages(0)
+      return
+    }
+    if (newPostsPerPage > posts.length) {
+      setPostsPerPage(posts.length)
+      setNumberPages(1)
+    }
+  }
+
   useEffect(() => {
     fetch(sourceUrl)
       .then((response) => response.json())
@@ -26,18 +39,16 @@ const Posts = () => {
     setPostsFoDisplay(postsPart)
   }, [posts, activePost, postsPerPage]);
 
-  console.log(numberPages)
-
   return (
     <>
       <input
         type="number"
         className='setPostsQuantity'
-        onChange={(e) => {
-          setPostsPerPage(e.target.value)
-          setNumberPages(Math.ceil(posts.length / e.target.value))
-        }}
+        onChange={handlerInput}
       ></input>
+
+      <span style={{ fontSize: "18px", fontWeight: 600 }}>Set posts per page</span>
+
       {postsFoDisplay.map((item) => {
         return (
           <div key={item.id}>
