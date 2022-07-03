@@ -11,15 +11,18 @@ const Posts = () => {
 
   function handlerInput(e) {
     let newPostsPerPage = e.target.value
-    if (newPostsPerPage < 0) {
+    if (newPostsPerPage <= 0) {
       setPostsPerPage(0)
-      setNumberPages(0)
+      setNumberPages(1)
       return
     }
     if (newPostsPerPage > posts.length) {
       setPostsPerPage(posts.length)
       setNumberPages(1)
+      return
     }
+    setPostsPerPage(newPostsPerPage)
+    setNumberPages(Math.ceil(posts.length / newPostsPerPage))
   }
 
   useEffect(() => {
